@@ -19,7 +19,6 @@ import {
   TextField,
 } from "@mui/material";
 import { getToken } from "../services/localStorageService";
-import Header from "./header/Header";  // Import Header component
 
 const TicketPage = () => {
   const [tickets, setTickets] = useState([]);
@@ -63,7 +62,9 @@ const TicketPage = () => {
       if (response.ok) {
         setSnackBarMessage(`Xóa vé ${ticketId} thành công.`);
         setSnackBarSuccessOpen(true);
-        fetchTickets(); // Tải lại danh sách vé
+
+        // Cập nhật danh sách vé sau khi xóa
+        setTickets((prevTickets) => prevTickets.filter(ticket => ticket.ticketId !== ticketId));
       } else {
         const errorData = await response.json();
         setSnackBarMessage(errorData.message || "Đã xảy ra lỗi khi xóa vé.");
@@ -99,7 +100,7 @@ const TicketPage = () => {
       if (data.result) {
         setSnackBarMessage(`Tạo vé thành công: ${ticketName}`);
         setSnackBarSuccessOpen(true);
-        fetchTickets();
+        fetchTickets(); // Tải lại danh sách vé
         handleCloseDialog();
       } else {
         setSnackBarMessage(data.message || "Đã xảy ra lỗi.");
@@ -135,9 +136,6 @@ const TicketPage = () => {
       </Snackbar>
 
       {/* Header */}
-      <Header /> {/* Thêm Header ở đây */}
-
-      {/* Danh sách vé */}
       <Box display="flex" justifyContent="space-between" mb={3}>
         <Typography variant="h4">Danh sách vé</Typography>
         <Button variant="contained" color="primary" onClick={handleOpenDialog}>

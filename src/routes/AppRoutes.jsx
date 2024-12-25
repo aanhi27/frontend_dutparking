@@ -8,7 +8,8 @@ import Recharge from "../components/Recharge";
 import Ticket from "../components/Ticket";
 import Buyticket from "../components/Buyticket";
 import Cart from "../components/Cart";
-
+import Allprofile from "../components/Allprofile";
+import Alluserticket from "../components/Alluserticket";
 
 
 
@@ -26,6 +27,8 @@ const AppRoutes = () => {
         <Route path="/ticket" element={<Ticket />} />
         <Route path="/buyticket" element={<Buyticket />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/allprofile" element={<Allprofile />} />
+        <Route path="/alluserticket" element={<Alluserticket />} />
         
         
       </Routes>

@@ -8,9 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
-import MailIcon from "@mui/icons-material/Mail";
 import HomeIcon from "@mui/icons-material/Home"; // Import HomeIcon
 import ExitToAppIcon from "@mui/icons-material/ExitToApp"; // Import ExitToAppIcon
+import VisibilityIcon from "@mui/icons-material/Visibility"; // Import VisibilityIcon (dùng làm icon Monitor)
 import { logOut } from "../../services/authenticationService";
 
 const Search = styled("div")(({ theme }) => ({
@@ -64,6 +64,10 @@ export default function Header() {
     navigate("/Home"); // Điều hướng về trang chủ (home)
   };
 
+  const handleMonitor = () => {
+    navigate("/monitor"); // Điều hướng về trang monitor
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -97,15 +101,17 @@ export default function Header() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {/* Nút Monitor */}
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
+              aria-label="monitor"
               color="inherit"
+              onClick={handleMonitor} // Gọi hàm handleMonitor khi nhấn
             >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
+              <VisibilityIcon />
             </IconButton>
+
+            {/* Nút Logout */}
             <IconButton
               size="large"
               edge="end"
@@ -115,6 +121,8 @@ export default function Header() {
             >
               <ExitToAppIcon />
             </IconButton>
+
+            {/* Nút Home */}
             <IconButton
               size="large"
               edge="end"
